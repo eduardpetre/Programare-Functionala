@@ -7,6 +7,10 @@ countVocale (h:t) =
     then 1 + countVocale t
     else countVocale t
 
+countVocaleM list = do
+    let filtered = filter (`elem` "aeiouAEIOU") list
+    return (length filtered)
+
 nrVocale :: [String] -> Int 
 nrVocale[] = 0
 nrVocale(h:t) =
@@ -28,10 +32,18 @@ f x(h:ls) =
 divizori :: Int -> [Int]
 divizori x = [y | y <- [1..x], mod x y == 0]
 
+divizoriM x = do
+    y <- [1..x]
+    if rem x y == 0 then return y else []
+
 
 
 listaDiv :: [Int] -> [[Int]]
 listaDiv ls = [divizori a | a <- ls]
+
+listaDivM list = do
+    x <- map divizori list
+    return x
 
 
 
